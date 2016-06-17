@@ -16,16 +16,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var tableView: UITableView!
     
     var movies: [NSDictionary]?
-    
-    let totalColors: Int = 100
-    func colorForIndexPath(indexPath: NSIndexPath) -> UIColor {
-        if indexPath.row >= totalColors {
-            return UIColor.blackColor()	// return black if we get an unexpected row index
-        }
-        
-        var hueValue: CGFloat = CGFloat(indexPath.row) / CGFloat(totalColors)
-        return UIColor(hue: hueValue, saturation: 1.0, brightness: 1.0, alpha: 1.0)
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
