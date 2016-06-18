@@ -19,9 +19,27 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     //var data: [String]?
     //var filteredData: [String]?
     
+    var endpoint: String!
+    //var modif: String!
+    var modify: Double!
+    
+    var tableData = ["one", "two", "three", "four", "six", "seven", "eight", "nine", "ten"]
     var request: NSURLRequest!
     var movies: [NSDictionary]!
     var filteredMovies: [NSDictionary]!
+    
+    func colorForIndex(index: Int) -> UIColor {
+        
+        let itemCount = tableData.count - 1
+        let color = (CGFloat(index) / CGFloat(itemCount)) * 0.35
+        let blueColor = CGFloat(modify)
+        return UIColor(red: 0.7, green: color, blue: blueColor, alpha: 1.0)
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
+                            forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.backgroundColor = colorForIndex(indexPath.row)
+    }
 
     
     override func viewDidLoad() {
@@ -44,7 +62,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         // Do any additional setup after loading the view.
         
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = NSURL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
+        let url = NSURL(string: "https://api.themoviedb.org/3/movie/\(endpoint)?api_key=\(apiKey)")
         let request = NSURLRequest(
             URL: url!,
             cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData,
@@ -112,10 +130,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         backgroundView.backgroundColor = UIColorFromRGB(0x209624)
         cell.selectedBackgroundView = backgroundView
         
-        let movie = filteredMovies![indexPath.row]
-        let title = movie["title"] as! String
         
-        let overview = movie["overview"] as! String
+        
+        let movie = filteredMovies![indexPath.row]
+        //let title = movie["title"] as! String
+        
+        //let overview = movie["overview"] as! String
         let baseUrl = "http://image.tmdb.org/t/p/w500"
         
         if let posterPath = movie["poster_path"] as? String {
@@ -153,9 +173,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             })*/
         
         
-           cell.titleLabel.text = title
+           //cell.titleLabel.text = title
         
-           cell.overviewLabel.text = overview
+           //cell.overviewLabel.text = overview
         }
         
         //print("\(overview)")

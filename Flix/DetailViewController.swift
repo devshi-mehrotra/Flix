@@ -45,6 +45,7 @@ class DetailViewController: UIViewController {
     
     @IBAction func openURL(sender: AnyObject) {
         let baseURL = "https://rottentomatoes.com/m/"
+        //let separatorURL = "m/"
         let title = movie["title"] as? String
         
         let noDash = title!.stringByReplacingOccurrencesOfString("-", withString: " ")
